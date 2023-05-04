@@ -42,6 +42,9 @@ pipeline {
                     echo  "uri = ${map.uri}"
                     echo  "target = ${map.target}"
                     echo  "verifyDeploy = ${map.verifyDeploy}"
+
+                    currentBuild.description = "Dv1.0.0"
+                    currentBuild.displayName = "Nv1.0.0"
                 }
             }
         }
