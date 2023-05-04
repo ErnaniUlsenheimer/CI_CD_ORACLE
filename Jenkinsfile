@@ -36,10 +36,19 @@ pipeline {
 
                     def map = parseJsonToMap(json)
 
+                    env.urlConexao = "${map.uri}"
+                    env.databaseConnect = "${map.target}"
+
                     echo  "uri = ${map.uri}"
                     echo  "target = ${map.target}"
                     echo  "verifyDeploy = ${map.verifyDeploy}"
                 }
+            }
+        }
+        stage("Test2") {
+            steps {
+                echo "${env.urlConexao}"
+                echo "${env.databaseConnect}"
             }
         }
     }
