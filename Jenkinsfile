@@ -23,7 +23,7 @@ def parseJsonToMap(String json) {
 
 @NonCPS
 def getBuildUser() {
-    return currentBuild.rawBuild.getCause(Cause.UserIdCause).getUserName()
+    return currentBuild.rawBuild.getCause(Cause.UserIdCause).getUserId()
 }
 
 pipeline {
