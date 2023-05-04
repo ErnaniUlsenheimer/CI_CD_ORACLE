@@ -1,0 +1,17 @@
+[
+    {
+	    "Tarefas":[
+            {
+                "Arquivo":"cidade.sql",
+                "Nome":"Table Cidade",                
+                "Descricao":"Nova Tabela Cidade",
+                "Autor":"Ernani Ulsenheimer"
+            }
+        ],
+	    "Git":{
+            "Version":"v1.0.0",
+            "Descricao":"Nova tabela cidade"
+        }
+    }
+]
+
