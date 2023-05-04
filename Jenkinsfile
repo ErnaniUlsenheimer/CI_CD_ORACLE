@@ -21,6 +21,11 @@ def parseJsonToMap(String json) {
     return new HashMap<>(slurper.parseText(json))
 }
 
+@NonCPS
+def getBuildUser() {
+    return currentBuild.rawBuild.getCause(Cause.UserIdCause).getUserName()
+}
+
 pipeline {
 
     agent any
@@ -43,7 +48,11 @@ pipeline {
                     echo  "target = ${map.target}"
                     echo  "verifyDeploy = ${map.verifyDeploy}"
 
-                    currentBuild.description = "v1.0.0 ${BUILD_USER}"                    
+                    def userName = getBuildUser()
+
+                    echo "User Name: ${userName}"
+
+                    currentBuild.description = "v1.0.0 ${userName}"                    
                 }
             }
         }
