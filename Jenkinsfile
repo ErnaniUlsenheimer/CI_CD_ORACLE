@@ -43,7 +43,7 @@ pipeline {
 
                     env.urlConexao = "${map.uri}"
                     env.databaseConnect = "${map.target}"
-                    env.versaoBuild ="${states}"
+                    env.versaoBuild ="${Versao}"
 
                     echo  "uri = ${map.uri}"
                     echo  "target = ${map.target}"
