@@ -114,9 +114,11 @@ pipeline {
                         
                         def sql = Sql.newInstance("${url_connect}", "$STRING_CONNCETION_DB_USR", "$STRING_CONNCETION_DB_PSW", 'oracle.jdbc.OracleDriver')
                         //def sql = Sql.newInstance('jdbc:oracle:thin:@192.168.1.10:1522/XEPDB1', "$STRING_CONNCETION_DB_USR", "$STRING_CONNCETION_DB_PSW", 'oracle.jdbc.OracleDriver')
-                        def rows = sql.rows("select * from usuario order by id")
-                        //def state = sql.execute("${tarefaArquivo}")
-                        println rows.join('\n')                    
+                        //def rows = sql.rows("select * from usuario order by id")
+                        //println rows.join('\n')                    
+                        def state_execute_DB = sql.execute("${tarefaArquivo}")
+                        echo "Estatdo execute ${state_execute_DB}"
+                        
                         sql.close()
 
                     }
