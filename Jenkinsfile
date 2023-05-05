@@ -52,13 +52,10 @@ pipeline {
                     echo  "target = ${map.target}"
                     echo  "verifyDeploy = ${map.verifyDeploy}"                    
 
-                    def jsonPlan = readFile(file: 'sqlPlan.json') 
-                    echo "Parsing Json Plan : ${jsonPlan}"
-
-                    def mapPlan = parseJsonToMap(jsonPlan)
-                     echo "Realizou parseJsontoMap"
+                    def jsonPlan = readJSON file: 'sqlPlan.json' 
+                    echo "Parsing Json Plan : ${jsonPlan}"   
                     
-                    mapPlan.each {val ->
+                    jsonPlan.each {val ->
                         println val
                     }
                     
