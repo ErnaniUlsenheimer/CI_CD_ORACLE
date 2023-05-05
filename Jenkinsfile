@@ -54,9 +54,16 @@ pipeline {
 
                     def jsonPlan = readJSON file: 'sqlPlan.json' 
                     echo "Parsing Json Plan : ${jsonPlan}"   
-                    
+                    def planejado = "FALSE"
                     jsonPlan.each {val ->
-                        println val
+                        if (val.Git.Version == env.versaoTag)
+                        {
+                            planejado = "TRUE"
+                        }
+                    }
+                    if (planejado == "FALSE")
+                    {
+                        error "Versão Planejado não está no arquivo de planejamento"
                     }
                     
                 }
