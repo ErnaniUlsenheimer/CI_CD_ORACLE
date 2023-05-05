@@ -112,15 +112,18 @@ pipeline {
                         def url_connect = "${env.urlConexao}" + '/' + "${env.databaseConnect}"
                         echo "url connect: ${url_connect}"
                         
-                        def sql = Sql.newInstance("${url_connect}", "$STRING_CONNCETION_DB_USR", "$STRING_CONNCETION_DB_PSW", 'oracle.jdbc.OracleDriver')
+                        //def sql = Sql.newInstance("${url_connect}", "$STRING_CONNCETION_DB_USR", "$STRING_CONNCETION_DB_PSW", 'oracle.jdbc.OracleDriver')
                         //def sql = Sql.newInstance('jdbc:oracle:thin:@192.168.1.10:1522/XEPDB1', "$STRING_CONNCETION_DB_USR", "$STRING_CONNCETION_DB_PSW", 'oracle.jdbc.OracleDriver')
                         //def rows = sql.rows("select * from usuario order by id")
                         //println rows.join('\n')  
-                        def stmt = sql.createStatement();                  
-                        def state_execute_DB = stmt.execute("${tarefaArquivo}")
+                        //sql.close()
+
+                        def conn = DriverManager.getConnection("${url_connect}", "$STRING_CONNCETION_DB_USR", "$STRING_CONNCETION_DB_PSW")
+                        def statement = conn.createStatement()
+                        def state_execute_DB = statement.execute("${tarefaArquivo}")
                         echo "Estatdo execute ${state_execute_DB}"
                         
-                        sql.close()
+                        
 
                     }
                 }
