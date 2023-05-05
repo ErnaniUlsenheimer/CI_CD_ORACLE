@@ -109,8 +109,9 @@ pipeline {
                         Class.forName("oracle.jdbc.OracleDriver")
                         TimeZone timeZone = TimeZone.getTimeZone("America/Sao_Paulo");
                         TimeZone.setDefault(timeZone);
-
-                        def sql = Sql.newInstance("${env.urlConexao}" + '/' + "${env.databaseConnect}", "$STRING_CONNCETION_DB_USR", "$STRING_CONNCETION_DB_PSW", 'oracle.jdbc.OracleDriver')
+                        def url_connect = "${env.urlConexao}" + '/' + "${env.databaseConnect}"
+                        echo "url connect: ${url_connect}"
+                        def sql = Sql.newInstance("${url_connect}", "$STRING_CONNCETION_DB_USR", "$STRING_CONNCETION_DB_PSW", 'oracle.jdbc.OracleDriver')
                         //def sql = Sql.newInstance('jdbc:oracle:thin:@192.168.1.10:1522/XEPDB1', "$STRING_CONNCETION_DB_USR", "$STRING_CONNCETION_DB_PSW", 'oracle.jdbc.OracleDriver')
                         //def rows = sql.rows("select * from usuario order by id")
                         //println rows.join('\n')                    
