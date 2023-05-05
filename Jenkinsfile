@@ -42,8 +42,7 @@ pipeline {
                     def map = parseJsonToMap(json)
 
                     env.urlConexao = "${map.uri}"
-                    env.databaseConnect = "${map.target}"
-                    env.versaoBuild ="${Versao}"
+                    env.databaseConnect = "${map.target}"                    
                     env.versaoTag ="${VersaoTag}"
 
                     echo  "uri = ${map.uri}"
@@ -62,8 +61,7 @@ pipeline {
         stage("Test2") {
             steps {
                 echo "${env.urlConexao}"
-                echo "${env.databaseConnect}"
-                echo "${env.versaoBuild}"
+                echo "${env.databaseConnect}"                
                 echo "${env.versaoTag}"
             }
         }
