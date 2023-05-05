@@ -43,10 +43,12 @@ pipeline {
 
                     env.urlConexao = "${map.uri}"
                     env.databaseConnect = "${map.target}"
+                    env.versaoBuild ="${states}"
 
                     echo  "uri = ${map.uri}"
                     echo  "target = ${map.target}"
                     echo  "verifyDeploy = ${map.verifyDeploy}"
+                    
 
                     def userName = getBuildUser()
 
@@ -60,6 +62,7 @@ pipeline {
             steps {
                 echo "${env.urlConexao}"
                 echo "${env.databaseConnect}"
+                echo "${env.versaoBuild}"
             }
         }
     }
