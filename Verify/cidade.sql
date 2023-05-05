@@ -1,1 +1,1 @@
-SELECT * FROM dba_tables where table_name = 'cidade'
+SELECT object_name as table_name FROM user_objects WHERE object_type = 'TABLE' AND object_name = 'USUARIO' ORDER BY object_name

@@ -111,27 +111,56 @@ pipeline {
                         //TimeZone.setDefault(timeZone);
                         def url_connect = "${env.urlConexao}" + '/' + "${env.databaseConnect}"
                         echo "url connect: ${url_connect}"
-                        
-                        //def sql = Sql.newInstance("${url_connect}", "$STRING_CONNCETION_DB_USR", "$STRING_CONNCETION_DB_PSW", 'oracle.jdbc.OracleDriver')
-                        //def sql = Sql.newInstance('jdbc:oracle:thin:@192.168.1.10:1522/XEPDB1', "$STRING_CONNCETION_DB_USR", "$STRING_CONNCETION_DB_PSW", 'oracle.jdbc.OracleDriver')
-                        //def rows = sql.rows("select * from usuario order by id")
-                        //println rows.join('\n')  
-                        //sql.close()
-
+                      
                         def conn = DriverManager.getConnection("${url_connect}", "$STRING_CONNCETION_DB_USR", "$STRING_CONNCETION_DB_PSW")
                         def statement = conn.createStatement()
                         def state_execute_DB = statement.execute("${tarefaArquivo}")
                         echo "Estatdo execute ${state_execute_DB}"
-                        
-                        
-
                     }
                 }
             }
         }
         stage("Verify"){
             steps {
-                echo "Verify"
+                script {
+                    echo "Verify"
+                    echo "${env.urlConexao}"
+                    echo "${env.databaseConnect}"                
+                    //echo "${env.versaoTag}"
+                    def v_planejado = env.jsonPlanejado                    
+                    //echo "Planejado ${v_planejado}"
+                    def v_tarefa = parseJsonToMap(v_planejado)
+                    //echo "Tarefas ${v_tarefa.Tarefas}"
+                
+                    v_tarefa.Tarefas.each { val2 ->
+                        println "Arquivo Deploy: ${val2.Arquivo}"
+                        def tarefaArquivo = readFile(file: 'Verify/'+ "${val2.Arquivo}") 
+                        echo "Tarefa Arquivo : ${tarefaArquivo}" 
+
+                        def classLoader = this.class.classLoader
+                        while (classLoader.parent) {
+                            classLoader = classLoader.parent
+                            if(classLoader.getClass() == java.net.URLClassLoader)
+                            {
+                                // load our jar into the urlclassloader
+                                classLoader.addURL(new File("/usr/share/jenkins/WEB-INF/lib/ojdbc11.jar").toURI().toURL())
+                                break;
+                            }
+                        }
+                        Class.forName("oracle.jdbc.OracleDriver")
+                        //TimeZone timeZone = TimeZone.getTimeZone("America/Sao_Paulo");
+                        //TimeZone.setDefault(timeZone);
+                        def url_connect = "${env.urlConexao}" + '/' + "${env.databaseConnect}"
+                        echo "url connect: ${url_connect}"
+                       
+
+                        def conn = DriverManager.getConnection("${url_connect}", "$STRING_CONNCETION_DB_USR", "$STRING_CONNCETION_DB_PSW")
+
+                        def statement = conn.prepareStatement("${tarefaArquivo}")
+                        def state_execute_DB = statement.executeQuery()                       
+                        echo "Estatdo execute ${state_execute_DB}"
+                    }
+                }
             }
         }
     }
