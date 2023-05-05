@@ -157,7 +157,11 @@ pipeline {
                         def conn = DriverManager.getConnection("${url_connect}", "$STRING_CONNCETION_DB_USR", "$STRING_CONNCETION_DB_PSW")
 
                         def statement = conn.prepareStatement("${tarefaArquivo}")
-                        def state_execute_DB = statement.executeQuery()                       
+                        def state_execute_DB = statement.executeQuery()  
+                        while (state_execute_DB.next()) {
+                            echo "Result: ${state_execute_DB.getString(1)}"
+                            
+                        }                     
                         echo "Estatdo execute ${state_execute_DB}"
                     }
                 }
