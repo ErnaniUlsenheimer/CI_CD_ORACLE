@@ -79,14 +79,14 @@ pipeline {
                     echo "Deploy"
                     echo "${env.urlConexao}"
                     echo "${env.databaseConnect}"                
-                    echo "${env.versaoTag}"
+                    //echo "${env.versaoTag}"
                     def v_planejado = env.jsonPlanejado                    
-                    echo "Planejado ${v_planejado}"
+                    //echo "Planejado ${v_planejado}"
                     def v_tarefa = parseJsonToMap(v_planejado)
-                    echo "Tarefas ${v_tarefa.Tarefas}"
+                    //echo "Tarefas ${v_tarefa.Tarefas}"
                 
                     v_tarefa.Tarefas.each { val2 ->
-                        println val2
+                        println "Arquivo Deploy: ${val2.Arquivo}"
                     }
                 }
             }
