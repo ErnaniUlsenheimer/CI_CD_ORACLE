@@ -1,5 +1,5 @@
 {
-	"uri":"jdbc:oracle:thin:@192.168.1.10:1521",
+	"uri":"jdbc:oracle:thin:@192.168.1.10:1522",
 	"target":"XEPDB1",
 	"verifyDeploy":"true"
 }
