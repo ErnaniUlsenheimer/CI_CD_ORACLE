@@ -41,7 +41,7 @@ pipeline {
 
                     def json = readFile(file: 'sqlConfig.json')                    
 
-                    echo "Parsing JSON: ${json}"
+                    echo "Parsing JSON Config: ${json}"
 
                     def map = parseJsonToMap(json)
 
@@ -53,10 +53,12 @@ pipeline {
                     echo  "verifyDeploy = ${map.verifyDeploy}"                    
 
                     def jsonPlan = readFile(file: 'sqlPlan.json') 
+                    echo "Parsing Json Plan : ${jsonPlan}"
 
                     def mapPlan = parseJsonToMap(jsonPlan)
-
-                    mapPlan{val ->
+                     echo "Realizou parseJsontoMap"
+                    
+                    mapPlan.each {val ->
                         println val
                     }
                     
