@@ -71,8 +71,8 @@ pipeline {
             }
         }
         stage("Verify"){
-            steps{
-
+            steps {
+                echo "Verify"
             }
         }
     }
