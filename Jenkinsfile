@@ -82,10 +82,10 @@ pipeline {
                     echo "${env.versaoTag}"
                     def v_planejado = env.jsonPlanejado                    
                     echo "Planejado ${v_planejado}"
-                    def v_tarefa = v_planejado.Tarefas
-                    echo "Tarefas ${v_tarefa}"
+                    def v_tarefa = parseJsonToMap(v_planejado)
+                    echo "Tarefas ${v_tarefa.Tarefas}"
                 
-                    v_tarefa.each { val2 ->
+                    v_tarefa.Tarefas.each { val2 ->
                         println val2
                     }
                 }
