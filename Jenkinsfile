@@ -31,9 +31,13 @@ pipeline {
     agent any
 
     stages {
-        stage('json') {
+        stage('Planejamento') {
             steps {
                 script {
+
+                    def userName = getBuildUser()
+                    env.versaoTag ="${VersaoTag}"
+                    currentBuild.description = "${env.versaoTag} ${userName}" 
 
                     def json = readFile(file: 'sqlConfig.json')                    
 
@@ -42,25 +46,33 @@ pipeline {
                     def map = parseJsonToMap(json)
 
                     env.urlConexao = "${map.uri}"
-                    env.databaseConnect = "${map.target}"                    
-                    env.versaoTag ="${VersaoTag}"
+                    env.databaseConnect = "${map.target}"                                        
 
                     echo  "uri = ${map.uri}"
                     echo  "target = ${map.target}"
                     echo  "verifyDeploy = ${map.verifyDeploy}"                    
 
-                    def userName = getBuildUser()
-                    currentBuild.description = "${env.versaoTag} ${userName}"   
+                    def jsonPlan = readFile(file: 'sqlPlan.json') 
+
+                    def mapPlan = parseJsonToMap(jsonPlan)
+
+                    mapPlan{val ->
+                        println val
+                    }
                     
-                    error "This pipeline stops here!"                 
                 }
             }
         }
-        stage("Test2") {
+        stage("Deploy") {
             steps {
                 echo "${env.urlConexao}"
                 echo "${env.databaseConnect}"                
                 echo "${env.versaoTag}"
+            }
+        }
+        stage("Verify"){
+            steps{
+
             }
         }
     }
