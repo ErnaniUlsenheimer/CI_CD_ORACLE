@@ -47,14 +47,10 @@ pipeline {
 
                     echo  "uri = ${map.uri}"
                     echo  "target = ${map.target}"
-                    echo  "verifyDeploy = ${map.verifyDeploy}"
-                    
+                    echo  "verifyDeploy = ${map.verifyDeploy}"                    
 
                     def userName = getBuildUser()
-
-                    echo "User Name: ${userName}"
-
-                    currentBuild.description = "v1.0.0 ${userName}"                    
+                    currentBuild.description = "${env.versaoTag} ${userName}"                    
                 }
             }
         }
