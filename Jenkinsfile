@@ -75,17 +75,18 @@ pipeline {
         }
         stage("Deploy") {
             steps {
-                echo "Deploy"
-                echo "${env.urlConexao}"
-                echo "${env.databaseConnect}"                
-                echo "${env.versaoTag}"
-                def planejado = "${env.jsonPlanejado}"
-                echo "${planejado}"
+                script {
+                    echo "Deploy"
+                    echo "${env.urlConexao}"
+                    echo "${env.databaseConnect}"                
+                    echo "${env.versaoTag}"
+                    def planejado = "${env.jsonPlanejado}"
+                    echo "${planejado}"
                 
-                planejado.Tarefas.each { val2 ->
-                    echo "File script ${val.Arquivo}"
+                    planejado.Tarefas.each { val2 ->
+                        echo "File script ${val.Arquivo}"
+                    }
                 }
-
             }
         }
         stage("Verify"){
