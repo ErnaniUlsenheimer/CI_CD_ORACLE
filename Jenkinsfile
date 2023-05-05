@@ -80,11 +80,13 @@ pipeline {
                     echo "${env.urlConexao}"
                     echo "${env.databaseConnect}"                
                     echo "${env.versaoTag}"
-                    def planejado = "${env.jsonPlanejado}"
-                    echo "Planejado ${planejado}"
+                    def v_planejado = "${env.jsonPlanejado}"                    
+                    echo "Planejado ${v_planejado}"
+                    def v_tarefa = "${v_planejado.Tarefas}";
+                    echo "Tarefas ${v_tarefa}"
                 
-                    planejado.Tarefas.each { val ->
-                        echo "File script ${val.Arquivo}"
+                    v_tarefa.each { val2 ->
+                        println val2
                     }
                 }
             }
