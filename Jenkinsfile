@@ -50,7 +50,9 @@ pipeline {
                     echo  "verifyDeploy = ${map.verifyDeploy}"                    
 
                     def userName = getBuildUser()
-                    currentBuild.description = "${env.versaoTag} ${userName}"                    
+                    currentBuild.description = "${env.versaoTag} ${userName}"   
+                    
+                    error "This pipeline stops here!"                 
                 }
             }
         }
