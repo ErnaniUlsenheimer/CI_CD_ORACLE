@@ -80,9 +80,9 @@ pipeline {
                     echo "${env.urlConexao}"
                     echo "${env.databaseConnect}"                
                     echo "${env.versaoTag}"
-                    def v_planejado = "${env.jsonPlanejado}"                    
+                    def v_planejado = env.jsonPlanejado                    
                     echo "Planejado ${v_planejado}"
-                    def v_tarefa = "${v_planejado.Tarefas}";
+                    def v_tarefa = v_planejado.Tarefas
                     echo "Tarefas ${v_tarefa}"
                 
                     v_tarefa.each { val2 ->
