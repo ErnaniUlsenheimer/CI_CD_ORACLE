@@ -87,6 +87,9 @@ pipeline {
                 
                     v_tarefa.Tarefas.each { val2 ->
                         println "Arquivo Deploy: ${val2.Arquivo}"
+                        def tarefaArquivo = readFile(file: 'Deploy/'+ "${val2.Arquivo}") 
+                        echo "Tarefa Arquivo : ${tarefaArquivo}" 
+
                     }
                 }
             }
