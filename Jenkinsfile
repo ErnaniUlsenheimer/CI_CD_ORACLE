@@ -31,9 +31,10 @@ pipeline {
     agent any
 
     stages {
-        stage('Planejamento') {
+        stage('Planejado') {
             steps {
                 script {
+                    echo "Planejado"
 
                     def userName = getBuildUser()
                     env.versaoTag ="${VersaoTag}"
@@ -41,7 +42,7 @@ pipeline {
 
                     def json = readFile(file: 'sqlConfig.json')                    
 
-                    echo "Parsing JSON Config: ${json}"
+                    echo "Read File Config"
 
                     def map = parseJsonToMap(json)
 
@@ -53,12 +54,15 @@ pipeline {
                     echo  "verifyDeploy = ${map.verifyDeploy}"                    
 
                     def jsonPlan = readJSON file: 'sqlPlan.json' 
-                    echo "Parsing Json Plan : ${jsonPlan}"   
+                    echo "Read File Plan"
+                    //echo "Parsing Json Plan : ${jsonPlan}"   
+                    
                     def planejado = "FALSE"
                     jsonPlan.each {val ->
                         if (val.Git.Version == env.versaoTag)
                         {
                             planejado = "TRUE"
+                            env.jsonPlanejado = val
                         }
                     }
                     if (planejado == "FALSE")
@@ -71,9 +75,15 @@ pipeline {
         }
         stage("Deploy") {
             steps {
+                echo "Deploy"
                 echo "${env.urlConexao}"
                 echo "${env.databaseConnect}"                
                 echo "${env.versaoTag}"
+
+                env.jsonPlanejado.Tarefas.each { val ->
+                    echo "File script ${val.Arquivo}"
+                }
+
             }
         }
         stage("Verify"){
