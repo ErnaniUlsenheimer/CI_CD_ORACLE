@@ -179,7 +179,7 @@ pipeline {
                     }
                    
                     sh """
-                        git tag -e ${env.versaoTag} -f -m \\"${setMessage}\\"
+                        git tag -s ${env.versaoTag} -m \\"${setMessage}\\"
                         git push origin/master
                     """ 
                     
