@@ -175,7 +175,7 @@ pipeline {
                     def setMessage = ""                    
                 
                     v_tarefa.Tarefas.each { val3 ->
-                        setMessage = setMessage + "Autor:" + val3.Autor + " " + val3.Descricao + '\r\n'
+                        setMessage = setMessage + "Autor:" + val3.Autor + " " + val3.Descricao 
                     }
                    
                     sh """
