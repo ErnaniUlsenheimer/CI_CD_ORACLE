@@ -169,24 +169,6 @@ pipeline {
                 }
             }
         }
-        stage("Git Tag Message"){
-            steps {
-                script {
-                    def v_planejado = env.jsonPlanejado                                        
-                    def v_tarefa = parseJsonToMap(v_planejado)
-                    def setMessage = ""                    
-                
-                    v_tarefa.Tarefas.each { val3 ->
-                        setMessage = setMessage + "#Autor:" + val3.Autor + " " + val3.Descricao 
-                    }
-                    checkout scm
-                    sh """
-                        git tag -d ${env.versaoTag}
-                        git push -u origin master --force
-                    """
-                    
-                }
-            }
-        }
+        
     }
 }
