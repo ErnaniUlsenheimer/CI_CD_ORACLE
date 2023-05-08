@@ -190,9 +190,10 @@ pipeline {
                             git config --global credential.helper '!f() { echo password=$GIT_PASSWORD; }; f'
                             
                         '''
-                        sh """
-                            git config remote.origin.url ${repoUrl}
+                        sh """                            
+                            git config remote.origin.url ${repoUrl}                            
                             git tag -d ${env.versaoTag}
+                            git commit -m "test commit"
                             git push origin master --force                            
                         """ 
                     }
