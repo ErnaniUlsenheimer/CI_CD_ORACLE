@@ -181,7 +181,7 @@ pipeline {
                         setMessage = setMessage + "#Autor:" + val3.Autor + " " + val3.Descricao 
                     }
                     sh """
-                        git remote add origin https://github.com/ErnaniUlsenheimer/CI_CD_ORACLE.git
+                        git remote set-url origin https://github.com/ErnaniUlsenheimer/CI_CD_ORACLE.git
                         git config --global user.name "ErnaniUlsenheimer"
                         git config --global user.email "ernaniu@gmail.com"
                         git config --global user.pass "devn480x13"
