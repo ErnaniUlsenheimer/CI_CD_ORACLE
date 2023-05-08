@@ -192,9 +192,8 @@ pipeline {
                         '''
                         sh """                            
                             git config remote.origin.url ${repoUrl}                            
-                            git tag -d ${env.versaoTag}
-                            git commit -m "test commit"
-                            git push origin master --force                            
+                            git tag -d ${env.versaoTag}                            
+                            git push -f origin 
                         """ 
                     }
                     
