@@ -30,6 +30,8 @@ def getBuildUser() {
     return currentBuild.rawBuild.getCause(Cause.UserIdCause).getUserId()
 }
 
+def repoUrl = 'https://github.com/ErnaniUlsenheimer/CI_CD_ORACLE.git'
+
 pipeline {
     agent any
     environment {
@@ -177,13 +179,25 @@ pipeline {
                     v_tarefa.Tarefas.each { val3 ->
                         setMessage = setMessage + "#Autor:" + val3.Autor + " " + val3.Descricao 
                     }
-                   
-                    sh """
-                        git tag -d ${env.versaoTag}
-                        git push origin HEAD:master --force
-                        git tag -a ${env.versaoTag} -m \\"${setMessage}\\"
-                        git push origin HEAD:master --force
-                    """ 
+
+                    withCredentials([usernamePassword(
+                        credentialsId: "ERNANIULSENHEIMER",
+                        passwordVariable: 'GIT_PASSWORD',
+                        usernameVariable: 'GIT_USERNAME')]) 
+                    {
+                        sh '''
+                            git config --global credential.username $GIT_USERNAME
+                            git config --global credential.helper '!f() { echo password=$GIT_PASSWORD; }; f'
+                            
+                        '''
+                        sh """
+                            git config remote.origin.url ${repoUrl}
+                            git tag -d ${env.versaoTag}
+                            git push origin HEAD:master --force
+                            git tag -a ${env.versaoTag} -m \\"${setMessage}\\"
+                            git push origin HEAD:master --force
+                        """ 
+                    }
                     
                 }
             }
