@@ -179,23 +179,10 @@ pipeline {
                     v_tarefa.Tarefas.each { val3 ->
                         setMessage = setMessage + "#Autor:" + val3.Autor + " " + val3.Descricao 
                     }
-
-                    withCredentials([usernamePassword(
-                        credentialsId: "ErnaniUlsenheimer",
-                        passwordVariable: 'GIT_PASSWORD',
-                        usernameVariable: 'GIT_USERNAME')]) 
-                    {
-                        sh '''
-                            git config --global credential.username $GIT_USERNAME
-                            git config --global credential.helper '!f() { echo password=$GIT_PASSWORD; }; f'
-                            
-                        '''
-                        sh """                            
-                            git config remote.origin.url ${repoUrl}                            
-                            git tag -d ${env.versaoTag}                            
-                            git push -f origin HEAD:master
-                        """ 
-                    }
+                    checkout scm
+                   
+                    git tag -d ${env.versaoTag}
+                    git push origin master --force
                     
                 }
             }
