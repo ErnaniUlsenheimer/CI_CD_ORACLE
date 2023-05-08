@@ -167,5 +167,22 @@ pipeline {
                 }
             }
         }
+        stage("Git Teg Message"){
+            steps {
+                script {
+                    def v_planejado = env.jsonPlanejado                                        
+                    def v_tarefa = parseJsonToMap(v_planejado)
+                    def setMessage = ""
+                    
+                
+                    v_tarefa.Tarefas.each { val3 ->
+                        setMessage = setMessage + val3.Autor + " " + val3.Descricao + '\r\n'
+                    }
+                     sh "git tag -m '${setMessage}'"
+                     sh "git push"
+
+                }
+            }
+        }
     }
 }
