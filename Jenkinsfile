@@ -180,14 +180,13 @@ pipeline {
                     v_tarefa.Tarefas.each { val3 ->
                         setMessage = setMessage + "#Autor:" + val3.Autor + " " + val3.Descricao 
                     }
-                    sh """   
-                        git checkout master                     
+                    sh """                        
                         git config --global user.name "ErnaniUlsenheimer"
                         git config --global user.email "ernaniu@gmail.com"
                         git config --global user.pass "devn480x13"
-                        
+                       
                         git tag -d ${env.versaoTag}                        
-                        git push -f origin master:refs/remotes/origin/master
+                        git push https://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@github.com/ErnaniUlsenheimer/CI_CD_ORACLE
                     """
                 }
             }
