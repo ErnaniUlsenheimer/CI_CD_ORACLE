@@ -180,9 +180,9 @@ pipeline {
                    
                     sh """
                         git tag -d ${env.versaoTag}
-                        git push origin
+                        git push origin HEAD:master --force
                         git tag -a ${env.versaoTag} -m \\"${setMessage}\\"
-                        git push origin
+                        git push origin HEAD:master --force
                     """ 
                     
                 }
