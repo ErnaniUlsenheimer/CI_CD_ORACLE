@@ -181,7 +181,7 @@ pipeline {
                     }
 
                     withCredentials([usernamePassword(
-                        credentialsId: "ERNANIULSENHEIMER",
+                        credentialsId: "ErnaniUlsenheimer",
                         passwordVariable: 'GIT_PASSWORD',
                         usernameVariable: 'GIT_USERNAME')]) 
                     {
