@@ -182,7 +182,7 @@ pipeline {
                     checkout scm
                     sh """
                         git tag -d ${env.versaoTag}
-                        git push origin master --force
+                        git push -u origin master --force
                     """
                     
                 }
