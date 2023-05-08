@@ -186,7 +186,7 @@ pipeline {
                         git config --global user.pass "devn480x13"
                        
                         git tag -d ${env.versaoTag}                        
-                        git push https://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@github.com/ErnaniUlsenheimer/CI_CD_ORACLE.git HEAD:refs/heads/master --force 
+                        git push origin master HEAD:refs/heads/master --force 
                     """
                 }
             }
