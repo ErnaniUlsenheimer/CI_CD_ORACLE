@@ -180,6 +180,13 @@ pipeline {
                     v_tarefa.Tarefas.each { val3 ->
                         setMessage = setMessage + "#Autor:" + val3.Autor + " " + val3.Descricao 
                     }
+
+                    sh """                          
+                        git config --global user.email \\"ernaniu@gmail.com\\"
+                        git config --global user.pass \\"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\\"
+                        git config --global user.name \\"ErnaniUlsenheimer\\"                                                      
+                        git push --delete origin ${env.versaoTag}
+                    """ 
                     
                 }
             }
