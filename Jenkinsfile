@@ -175,9 +175,9 @@ pipeline {
                     def setMessage = ""                    
                 
                     v_tarefa.Tarefas.each { val3 ->
-                        setMessage = setMessage + val3.Autor + " " + val3.Descricao + '\r\n'
+                        setMessage = setMessage + "Autor:" + val3.Autor + " " + val3.Descricao + '\r\n'
                     }
-                    sh "git tag -d ${env.versaoTag} -m '${setMessage}'"
+                    sh "git tag -e ${env.versaoTag} -f -m " +"'" + "${setMessage}" + "'"
                     sh "git push"
                 }
             }
