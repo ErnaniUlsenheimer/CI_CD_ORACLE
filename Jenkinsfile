@@ -180,9 +180,10 @@ pipeline {
                         setMessage = setMessage + "#Autor:" + val3.Autor + " " + val3.Descricao 
                     }
                     checkout scm
-                   
-                    git tag -d ${env.versaoTag}
-                    git push origin master --force
+                    sh """
+                        git tag -d ${env.versaoTag}
+                        git push origin master --force
+                    """
                     
                 }
             }
