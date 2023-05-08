@@ -169,6 +169,27 @@ pipeline {
                 }
             }
         }
-        
+        stage("Git Tag Message"){
+            steps {
+                script {
+                    echo "Git Tag Message"
+                    def v_planejado = env.jsonPlanejado                                        
+                    def v_tarefa = parseJsonToMap(v_planejado)
+                    def setMessage = ""                    
+                
+                    v_tarefa.Tarefas.each { val3 ->
+                        setMessage = setMessage + "#Autor:" + val3.Autor + " " + val3.Descricao 
+                    }
+                    sh """
+                        git remote add origin https://github.com/ErnaniUlsenheimer/CI_CD_ORACLE.git
+                        git config --global user.name "ErnaniUlsenheimer"
+                        git config --global user.email "ernaniu@gmail.com"
+                        git config --global user.pass "devn480x13"
+                        git tag -d ${env.versaoTag}                        
+                        git push origin master
+                    """
+                }
+            }
+        }
     }
 }
