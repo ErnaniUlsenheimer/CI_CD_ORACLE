@@ -193,9 +193,7 @@ pipeline {
                         sh """
                             git config remote.origin.url ${repoUrl}
                             git tag -d ${env.versaoTag}
-                            git push origin HEAD:master --force
-                            git tag -a ${env.versaoTag} -m \\"${setMessage}\\"
-                            git push origin HEAD:master --force
+                            git push origin master --force                            
                         """ 
                     }
                     
