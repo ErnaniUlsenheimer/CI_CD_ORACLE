@@ -186,7 +186,7 @@ pipeline {
                         git config --global user.email "ernaniu@gmail.com"
                         git config --global user.pass "devn480x13"
                         git tag -d ${env.versaoTag}                        
-                        git push origin master
+                        git push origin main
                     """
                 }
             }
