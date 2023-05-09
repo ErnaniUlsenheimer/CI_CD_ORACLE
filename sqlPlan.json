@@ -2,6 +2,26 @@
     {
 	    "Tarefas":[
             {
+                "Arquivo":"estados.sql",
+                "Nome":"Table Estado",                
+                "Descricao":"Nova Tabela Estado",
+                "Autor":"Ernani Ulsenheimer"
+            },
+            {
+                "Arquivo":"paises.sql",
+                "Nome":"Table Paises",                
+                "Descricao":"Nova Tabela Paises",
+                "Autor":"Outro Desenvolvedor"
+            }
+        ],
+	    "Git":{
+            "Version":"V1.0.1",
+            "Descricao":"Nova tabela estados e paises"
+        }
+    },
+    {
+	    "Tarefas":[
+            {
                 "Arquivo":"cidade.sql",
                 "Nome":"Table Cidade",                
                 "Descricao":"Nova Tabela Cidade",

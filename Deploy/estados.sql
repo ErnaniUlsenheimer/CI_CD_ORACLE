@@ -1,0 +1,1 @@
+create table estado (id number not null, nome varchar2(40) not null, nomenclatura varchar2(2) null)
