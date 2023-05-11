@@ -212,12 +212,12 @@ pipeline {
                     def setMessage = ""                    
                 
                     v_tarefa.Tarefas.each { val3 ->
-                        setMessage = setMessage + "#Autor:" + val3.Autor + " " + val3.Descricao 
+                        setMessage = setMessage + "#Autor:" + val3.Autor + "," + val3.Descricao 
                     }   
                     echo "Setando a descricao da tag ${env.versaoTag}"
                     withCredentials([gitUsernamePassword(credentialsId: 'ErnaniUlsenheimer', gitToolName: 'Default')]) {                       
                         sh """
-                            git tag ${env.versaoTag} -f -m 'teste2'
+                            git tag ${env.versaoTag} -f -m '${setMessage}'
                         """
                         sh "git push -f -u origin ${env.versaoTag}"
                     }               
