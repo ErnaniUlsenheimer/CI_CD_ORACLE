@@ -35,9 +35,30 @@ pipeline {
     environment {
         STRING_CONNCETION_DB=credentials('fepamusername')        
     }
-    
+    options {
+        skipDefaultCheckout(true)
+    }
 
-    stages {        
+    stages {    
+        stage("Checkout SCM") {
+            steps {
+                script {
+                    echo "Checkout SCM"
+                    env.GITMYBRANCH = "${BranchRevert}"
+                    //echo "Git Branch ${env.GITMYBRANCH}"
+                    //echo "Git Branch env ${scm.branches[0].name}"
+                    //checkout scm
+                    checkout scm: ([
+                        $class: 'GitSCM',
+                        branches: [[name: env.GITMYBRANCH]],
+                         doGenerateSubmoduleConfigurations: scm.doGenerateSubmoduleConfigurations,
+                         extensions: scm.extensions,
+                         userRemoteConfigs: scm.userRemoteConfigs
+                    ])
+                    
+                }
+            }
+        }    
         stage('Planejado') {
             steps {
                 script {
