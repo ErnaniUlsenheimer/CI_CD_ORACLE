@@ -217,7 +217,7 @@ pipeline {
                     echo "Setando a descricao da tag ${env.versaoTag}"
                     withCredentials([gitUsernamePassword(credentialsId: 'ErnaniUlsenheimer', gitToolName: 'Default')]) {                       
                         sh """
-                            git tag ${env.versaoTag} -m \\"teste\\" 
+                            git tag ${env.versaoTag} -f -m \\"teste\\" 
                         """
                         sh "git push -u origin ${env.versaoTag}"
                     }               
