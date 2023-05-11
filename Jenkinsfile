@@ -48,7 +48,9 @@ pipeline {
                     echo "Checkout SCM"
                     env.GITMYBRANCH = "${BranchDeploy}"
                     echo "Git Branch ${env.GITMYBRANCH}"
-                    echo "Git URL Remote ${scm.userRemoteConfigs[0].url}"
+                    echo "Git Branch env ${scm.branches[0].name}"
+
+                  
                     //checkout scm
                     checkout scm: ([
                         $class: 'GitSCM',
@@ -56,7 +58,7 @@ pipeline {
                         //doGenerateSubmoduleConfigurations: false,
                         //extensions: [[$class: 'CleanCheckout']], 
                         //submoduleCfg: [], 
-                        userRemoteConfigs: [[credentialsId: 'ErnaniUlsenheimer', url: 'https://github.com/ErnaniUlsenheimer/CI_CD_ORACLE.git']]
+                        userRemoteConfigs: [[credentialsId: 'ErnaniUlsenheimer', url: "${scm.userRemoteConfigs[0].url}"]]
                     ])
                     
                 }
