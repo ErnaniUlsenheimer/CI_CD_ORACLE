@@ -214,8 +214,8 @@ pipeline {
                     v_tarefa.Tarefas.each { val3 ->
                         setMessage = setMessage + "#Autor:" + val3.Autor + " " + val3.Descricao 
                     }   
-                    withCredentials([gitUsernamePassword(credentialsId: 'ErnaniUlsenheimer', gitToolName: 'Default')]) {
-                        echo "Setando a descricao da tag ${env.versaoTag}"
+                    echo "Setando a descricao da tag ${env.versaoTag}"
+                    withCredentials([gitUsernamePassword(credentialsId: 'ErnaniUlsenheimer', gitToolName: 'Default')]) {                       
                         sh """
                             git tag ${env.versaoTag} -f -m \\"${setMessage}\\" 
                         """
