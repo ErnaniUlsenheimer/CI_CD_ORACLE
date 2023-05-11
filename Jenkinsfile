@@ -45,8 +45,9 @@ pipeline {
         stage("Checkout SCM") {
             steps {
                 script {
+                    echo "Checkout SCM"
                     env.GITMYBRANCH = "${BranchDeploy}"
-                    echo "Git url ${env.GIT_URL}"
+                    echo "Git Branch ${env.GITMYBRANCH}"
                     //checkout scm
                     checkout scm: ([
                         $class: 'GitSCM',
