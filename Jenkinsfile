@@ -48,6 +48,7 @@ pipeline {
                     echo "Checkout SCM"
                     env.GITMYBRANCH = "${BranchDeploy}"
                     echo "Git Branch ${env.GITMYBRANCH}"
+                    echo "Git URL Remote ${env.GIT_URL}"
                     //checkout scm
                     checkout scm: ([
                         $class: 'GitSCM',
