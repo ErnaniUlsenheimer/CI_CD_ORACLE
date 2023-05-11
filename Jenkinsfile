@@ -209,15 +209,16 @@ pipeline {
                     echo "Git Tag Message"
                     def v_planejado = env.jsonPlanejado                                        
                     def v_tarefa = parseJsonToMap(v_planejado)
-                    def setMessage = ""                    
+                    def setMessage = "'"                    
                 
                     v_tarefa.Tarefas.each { val3 ->
                         setMessage = setMessage + "#Autor:" + val3.Autor + "," + val3.Descricao 
                     }   
+                    setMessage = setMessage + "'"                    
                     echo "Setando a descricao da tag ${env.versaoTag}"
                     withCredentials([gitUsernamePassword(credentialsId: 'ErnaniUlsenheimer', gitToolName: 'Default')]) {                       
                         sh """
-                            git tag ${env.versaoTag} -f -m '${setMessage}'
+                            git tag ${env.versaoTag} -f -m ${setMessage}
                         """
                         sh "git push -f -u origin ${env.versaoTag}"
                     }               
