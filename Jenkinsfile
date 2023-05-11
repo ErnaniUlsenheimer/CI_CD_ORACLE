@@ -49,16 +49,21 @@ pipeline {
                     env.GITMYBRANCH = "${BranchDeploy}"
                     echo "Git Branch ${env.GITMYBRANCH}"
                     echo "Git Branch env ${scm.branches[0].name}"
+                    scm.branches[0].name = env.GITMYBRANCH
 
                   
                     //checkout scm
                     checkout scm: ([
                         $class: 'GitSCM',
                         branches: [[name: env.GITMYBRANCH]],
+                         doGenerateSubmoduleConfigurations: scm.doGenerateSubmoduleConfigurations,
+                         extensions: scm.extensions,
+                         userRemoteConfigs: scm.userRemoteConfigs
+
                         //doGenerateSubmoduleConfigurations: false,
                         //extensions: [[$class: 'CleanCheckout']], 
                         //submoduleCfg: [], 
-                        userRemoteConfigs: [[credentialsId: 'ErnaniUlsenheimer', url: "${scm.userRemoteConfigs[0].url}"]]
+                        //userRemoteConfigs: [[credentialsId: 'ErnaniUlsenheimer', url: "${scm.userRemoteConfigs[0].url}"]]
                     ])
                     
                 }
