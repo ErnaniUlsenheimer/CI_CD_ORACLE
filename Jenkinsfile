@@ -45,6 +45,7 @@ pipeline {
         stage("Checkout SCM") {
             steps {
                 script {
+                    env.GIT_BRANCH = "${BranchDeploy}"
                     checkout scm
                 }
             }
