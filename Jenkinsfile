@@ -209,23 +209,23 @@ pipeline {
                     echo "Git Tag Message"
                     def v_planejado = env.jsonPlanejado                                        
                     def v_tarefa = parseJsonToMap(v_planejado)
-                    env.setMessage = ""                    
+                    def userName = getBuildUser()
+                    env.setMessage = "Construido por ${userName}"                    
                 
-                    v_tarefa.Tarefas.each { val3 ->
-                        if(env.setMessage == "")
-                        {
-                            env.setMessage = env.setMessage + val3.Autor + " " + val3.Arquivo 
-                        }
-                        else
-                        {
-                            env.setMessage = env.setMessage + ", " + val3.Autor + " " + val3.Arquivo
-                        }
-                    }   
-                    if(env.setMessage.length() > 199)
-                    {
-                        def n_message = env.setMessage.substring(0, 199);
-
-                    }
+                    //v_tarefa.Tarefas.each { val3 ->
+                    //    if(env.setMessage == "")
+                    //    {
+                    //        env.setMessage = env.setMessage + val3.Autor + " " + val3.Arquivo 
+                    //    }
+                    //    else
+                    //    {
+                    //        env.setMessage = env.setMessage + ", " + val3.Autor + " " + val3.Arquivo
+                    //    }
+                    //}   
+                    //if(env.setMessage.length() > 199)
+                    //{
+                    //    def n_message = env.setMessage.substring(0, 199);
+                    //}
                                     
                     echo "Setando a descricao da tag ${env.versaoTag}"
                     withCredentials([gitUsernamePassword(credentialsId: 'ErnaniUlsenheimer', gitToolName: 'Default')]) {                       
