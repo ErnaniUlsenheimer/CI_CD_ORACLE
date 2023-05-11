@@ -37,8 +37,14 @@ pipeline {
     environment {
         STRING_CONNCETION_DB=credentials('fepamusername')
     }
+    options {
+        skipDefaultCheckout(true)
+    }
 
     stages {
+        stage("Checkout SCM") {
+            checkout scm
+        }
         stage('Planejado') {
             steps {
                 script {

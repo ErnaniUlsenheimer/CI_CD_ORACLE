@@ -33,14 +33,11 @@ def getBuildUser() {
 pipeline {
     agent any
     environment {
-        STRING_CONNCETION_DB=credentials('fepamusername')
+        STRING_CONNCETION_DB=credentials('fepamusername')        
     }
-    checkout scmGit(
-    branches: [[name: "${BranchDeploy}"]],
-    extensions: [pruneStaleBranch(), pruneTags(true)],
-    userRemoteConfigs: [[url: 'https://github.com/jenkinsci/ws-cleanup-plugin']])
+    
 
-    stages {
+    stages {        
         stage('Planejado') {
             steps {
                 script {
