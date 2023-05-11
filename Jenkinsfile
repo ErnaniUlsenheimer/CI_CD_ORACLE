@@ -48,8 +48,7 @@ pipeline {
                     echo "Checkout SCM"
                     env.GITMYBRANCH = "${BranchDeploy}"
                     //echo "Git Branch ${env.GITMYBRANCH}"
-                    //echo "Git Branch env ${scm.branches[0].name}"
-                  
+                    //echo "Git Branch env ${scm.branches[0].name}"                  
                     //checkout scm
                     checkout scm: ([
                         $class: 'GitSCM',
@@ -57,11 +56,6 @@ pipeline {
                          doGenerateSubmoduleConfigurations: scm.doGenerateSubmoduleConfigurations,
                          extensions: scm.extensions,
                          userRemoteConfigs: scm.userRemoteConfigs
-
-                        //doGenerateSubmoduleConfigurations: false,
-                        //extensions: [[$class: 'CleanCheckout']], 
-                        //submoduleCfg: [], 
-                        //userRemoteConfigs: [[credentialsId: 'ErnaniUlsenheimer', url: "${scm.userRemoteConfigs[0].url}"]]
                     ])
                     
                 }
@@ -219,7 +213,13 @@ pipeline {
                 
                     v_tarefa.Tarefas.each { val3 ->
                         setMessage = setMessage + "#Autor:" + val3.Autor + " " + val3.Descricao 
-                    }                  
+                    }   
+                    withCredentials([gitUsernamePassword(credentialsId: 'ErnaniUlsenheimer', gitToolName: 'Default')]) {
+                        sh """
+                            git tag ${env.versaoTag} -f -m \\"${setMessage}\\" 
+                        """
+                        sh "git push -u origin ${env.versaoTag}"
+                    }               
                     
                 }
             }
