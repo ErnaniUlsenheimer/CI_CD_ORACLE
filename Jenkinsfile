@@ -68,9 +68,9 @@ pipeline {
 
                     def userName = getBuildUser()
                     env.versaoTag ="${VersaoTag}"
-                    env.dbDeploy ="${DataBaseDeploy}" 
-                    env.GITMYBRANCH = "${BranchDeploy}"
-                    
+                    env.dbDeploy ="${DataBaseDeploy}"                     
+                    echo "Git Branch ${env.GITMYBRANCH}"
+
                     currentBuild.description = "${env.versaoTag} ${userName} ${env.dbDeploy} ${env.GITMYBRANCH}" 
 
                     def json = readFile(file: 'sqlConfig.json')                    
