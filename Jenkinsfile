@@ -214,11 +214,11 @@ pipeline {
                     v_tarefa.Tarefas.each { val3 ->
                         if(env.setMessage == "")
                         {
-                            env.setMessage = env.setMessage + "Autor " + val3.Autor + " " + val3.Descricao 
+                            env.setMessage = env.setMessage + "Autor " + val3.Autor + " " + val3.Arquivo 
                         }
                         else
                         {
-                            env.setMessage = env.setMessage + ", Autor " + val3.Autor + " " + val3.Descricao
+                            env.setMessage = env.setMessage + ", Autor " + val3.Autor + " " + val3.Arquivo
                         }
                     }   
                                     
