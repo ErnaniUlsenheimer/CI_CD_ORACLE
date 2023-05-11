@@ -140,35 +140,42 @@ pipeline {
                 
                     v_tarefa.Tarefas.each { val2 ->
                         println "Arquivo Verify: ${val2.Arquivo}"
-                        def tarefaArquivo = readFile(file: 'Verify/'+ "${val2.Arquivo}") 
-                        echo "Tarefa Arquivo : ${tarefaArquivo}" 
+                        if(fileExists(file:)'Verify/'+ "${val2.Arquivo}")
+                        {
+                            def tarefaArquivo = readFile(file: 'Verify/'+ "${val2.Arquivo}") 
+                            echo "Tarefa Arquivo : ${tarefaArquivo}" 
 
-                        def classLoader = this.class.classLoader
-                        while (classLoader.parent) {
-                            classLoader = classLoader.parent
-                            if(classLoader.getClass() == java.net.URLClassLoader)
-                            {
+                            def classLoader = this.class.classLoader
+                            while (classLoader.parent) {
+                                classLoader = classLoader.parent
+                                if(classLoader.getClass() == java.net.URLClassLoader)
+                                {
                                 // load our jar into the urlclassloader
-                                classLoader.addURL(new File("/usr/share/jenkins/WEB-INF/lib/ojdbc11.jar").toURI().toURL())
-                                break;
+                                    classLoader.addURL(new File("/usr/share/jenkins/WEB-INF/lib/ojdbc11.jar").toURI().toURL())
+                                    break;
+                                }
                             }
-                        }
-                        Class.forName("oracle.jdbc.OracleDriver")
-                        //TimeZone timeZone = TimeZone.getTimeZone("America/Sao_Paulo");
-                        //TimeZone.setDefault(timeZone);
-                        def url_connect = "${env.urlConexao}" + '/' + "${env.databaseConnect}"
-                        echo "url connect: ${url_connect}"
+                            Class.forName("oracle.jdbc.OracleDriver")
+                            //TimeZone timeZone = TimeZone.getTimeZone("America/Sao_Paulo");
+                            //TimeZone.setDefault(timeZone);
+                            def url_connect = "${env.urlConexao}" + '/' + "${env.databaseConnect}"
+                            echo "url connect: ${url_connect}"
                        
 
-                        def conn = DriverManager.getConnection("${url_connect}", "$STRING_CONNCETION_DB_USR", "$STRING_CONNCETION_DB_PSW")
+                            def conn = DriverManager.getConnection("${url_connect}", "$STRING_CONNCETION_DB_USR", "$STRING_CONNCETION_DB_PSW")
 
-                        def statement = conn.prepareStatement("${tarefaArquivo}")
-                        def state_execute_DB = statement.executeQuery()  
-                        while (state_execute_DB.next()) {
-                            echo "Result: ${state_execute_DB.getString(1)}"
+                            def statement = conn.prepareStatement("${tarefaArquivo}")
+                            def state_execute_DB = statement.executeQuery()  
+                            while (state_execute_DB.next()) {
+                                echo "Result: ${state_execute_DB.getString(1)}"
                             
-                        }                     
-                        echo "Estatdo execute ${state_execute_DB}"
+                            }                     
+                            echo "Estatdo execute ${state_execute_DB}"
+                        }
+                        else{
+                            echo "Não existe arquivo na pasta Verify: ${val2.Arquivo}"
+                        }
+
                     }
                 }
             }
