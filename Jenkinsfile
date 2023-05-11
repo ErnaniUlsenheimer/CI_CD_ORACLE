@@ -46,7 +46,9 @@ pipeline {
 
                     def userName = getBuildUser()
                     env.versaoTag ="${VersaoTag}"
-                    currentBuild.description = "${env.versaoTag} ${userName}" 
+                    env.dbDeploy ="${DataBaseDeploy}" 
+                    
+                    currentBuild.description = "${env.versaoTag} ${userName} ${env.dbDeploy}" 
 
                     def json = readFile(file: 'sqlConfig.json')                    
 
@@ -55,7 +57,9 @@ pipeline {
                     def map = parseJsonToMap(json)
 
                     env.urlConexao = "${map.uri}"
-                    env.databaseConnect = "${map.target}"                                        
+                    env.databaseConnect = "${map.target}"   
+                      
+
 
                     echo  "uri = ${map.uri}"
                     echo  "target = ${map.target}"

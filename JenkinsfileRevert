@@ -44,7 +44,8 @@ pipeline {
 
                     def userName = getBuildUser()
                     env.versaoTag ="${VersaoTag}"
-                    currentBuild.description = "${env.versaoTag} ${userName}" 
+                    env.dbRevert ="${DataBaseRevert}"
+                    currentBuild.description = "${env.versaoTag} ${userName} ${env.dbRevert}" 
 
                     def json = readFile(file: 'sqlConfig.json')                    
 
