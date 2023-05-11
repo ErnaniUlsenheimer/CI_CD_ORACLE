@@ -43,7 +43,11 @@ pipeline {
 
     stages {
         stage("Checkout SCM") {
-            checkout scm
+            steps {
+                script {
+                    checkout scm
+                }
+            }
         }
         stage('Planejado') {
             steps {
