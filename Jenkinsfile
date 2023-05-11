@@ -140,7 +140,7 @@ pipeline {
                 
                     v_tarefa.Tarefas.each { val2 ->
                         println "Arquivo Verify: ${val2.Arquivo}"
-                        if(fileExists(file:'Verify/'+ "${val2.Arquivo}")
+                        if(fileExists(file:'Verify/'+ "${val2.Arquivo}"))
                         {
                             def tarefaArquivo = readFile(file: 'Verify/'+ "${val2.Arquivo}") 
                             echo "Tarefa Arquivo : ${tarefaArquivo}" 
