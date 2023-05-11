@@ -122,6 +122,7 @@ pipeline {
                 
                     v_tarefa.Tarefas.each { val2 ->
                         println "Arquivo Deploy: ${val2.Arquivo}"
+                        println " Autor Deploy: ${val2.Autor}"
                         def tarefaArquivo = readFile(file: 'Deploy/'+ "${val2.Arquivo}") 
                         echo "Tarefa Arquivo : ${tarefaArquivo}" 
 

@@ -115,6 +115,7 @@ pipeline {
                 
                     v_tarefa.Tarefas.each { val2 ->
                         println "Arquivo Revert: ${val2.Arquivo}"
+                        println "Autor Revert: ${val2.Autor}"
                         if(fileExists(file:'Revert/'+ "${val2.Arquivo}"))
                         {
                             def tarefaArquivo = readFile(file: 'Revert/'+ "${val2.Arquivo}") 
