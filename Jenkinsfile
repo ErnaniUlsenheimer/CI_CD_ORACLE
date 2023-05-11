@@ -69,6 +69,7 @@ pipeline {
                     def userName = getBuildUser()
                     env.versaoTag ="${VersaoTag}"
                     env.dbDeploy ="${DataBaseDeploy}" 
+                    env.GITMYBRANCH = "${BranchDeploy}"
                     
                     currentBuild.description = "${env.versaoTag} ${userName} ${env.dbDeploy} ${env.GITMYBRANCH}" 
 
