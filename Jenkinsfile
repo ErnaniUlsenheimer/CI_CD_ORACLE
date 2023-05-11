@@ -45,8 +45,18 @@ pipeline {
         stage("Checkout SCM") {
             steps {
                 script {
-                    env.GIT_BRANCH = "${BranchDeploy}"
-                    checkout scm
+                    env.GITMYBRANCH = "${BranchDeploy}"
+                    echo "Git url ${env.GIT_URL}"
+                    //checkout scm
+                    checkout scm: ([
+                        $class: 'GitSCM',
+                        branches: [[name: env.GITMYBRANCH]],
+                        //doGenerateSubmoduleConfigurations: false,
+                        //extensions: [[$class: 'CleanCheckout']], 
+                        //submoduleCfg: [], 
+                        userRemoteConfigs: [[credentialsId: 'ErnaniUlsenheimer', url: 'https://github.com/ErnaniUlsenheimer/CI_CD_ORACLE.git']]
+                    ])
+                    
                 }
             }
         }
