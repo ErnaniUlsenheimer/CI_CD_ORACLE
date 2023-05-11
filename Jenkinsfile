@@ -70,7 +70,7 @@ pipeline {
                     env.versaoTag ="${VersaoTag}"
                     env.dbDeploy ="${DataBaseDeploy}" 
                     
-                    currentBuild.description = "${env.versaoTag} ${userName} ${env.dbDeploy}" 
+                    currentBuild.description = "${env.versaoTag} ${userName} ${env.dbDeploy} ${env.GITMYBRANCH}" 
 
                     def json = readFile(file: 'sqlConfig.json')                    
 
