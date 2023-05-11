@@ -219,7 +219,7 @@ pipeline {
                         sh """
                             git tag ${env.versaoTag} -f -m \\"teste\\" 
                         """
-                        sh "git push -u origin ${env.versaoTag}"
+                        sh "git push -f -u origin ${env.versaoTag}"
                     }               
                     
                 }
