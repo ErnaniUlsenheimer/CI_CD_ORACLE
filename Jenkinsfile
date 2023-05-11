@@ -215,6 +215,7 @@ pipeline {
                         setMessage = setMessage + "#Autor:" + val3.Autor + " " + val3.Descricao 
                     }   
                     withCredentials([gitUsernamePassword(credentialsId: 'ErnaniUlsenheimer', gitToolName: 'Default')]) {
+                        echo "Setando a descricao da tag ${env.versaoTag}"
                         sh """
                             git tag ${env.versaoTag} -f -m \\"${setMessage}\\" 
                         """
