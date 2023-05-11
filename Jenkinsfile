@@ -209,7 +209,7 @@ pipeline {
                     echo "Git Tag Message"
                     def v_planejado = env.jsonPlanejado                                        
                     def v_tarefa = parseJsonToMap(v_planejado)
-                    def env.setMessage = ""                    
+                    env.setMessage = ""                    
                 
                     v_tarefa.Tarefas.each { val3 ->
                         env.setMessage = env.setMessage + "#Autor:" + val3.Autor + " " + val3.Descricao 
