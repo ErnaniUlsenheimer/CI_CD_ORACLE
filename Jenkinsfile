@@ -49,7 +49,7 @@ pipeline {
                     env.GITMYBRANCH = "${BranchDeploy}"
                     echo "Git Branch ${env.GITMYBRANCH}"
                     echo "Git Branch env ${scm.branches[0].name}"
-                    scm.branches[0].name = env.GITMYBRANCH
+                    
 
                   
                     //checkout scm
