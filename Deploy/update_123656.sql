@@ -1,0 +1,1 @@
+create table produto (id number not null, nome varchar2(40) not null)
