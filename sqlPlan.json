@@ -1,5 +1,19 @@
 [
- {
+    {
+	    "Tarefas":[
+            {
+                "Arquivo":"cliente.sql",
+                "Nome":"Table Cliente",                
+                "Descricao":"Nova Tabela Cliente",
+                "Autor":"Ernani Ulsenheimer"
+            }
+        ],
+	    "Git":{
+            "Version":"V1.0.3",
+            "Descricao":"Nova tabela cliente"
+        }
+    },
+    {
 	    "Tarefas":[
             {
                 "Arquivo":"cliente.sql",
