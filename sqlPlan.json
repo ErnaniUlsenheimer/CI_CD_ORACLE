@@ -2,15 +2,15 @@
     {
 	    "Tarefas":[
             {
-                "Arquivo":"cliente.sql",
-                "Nome":"Table Cliente",                
-                "Descricao":"Nova Tabela Cliente",
+                "Arquivo":"update_123656.sql",
+                "Nome":"Table Produto",                
+                "Descricao":"Nova Tabela Produto",
                 "Autor":"Ernani Ulsenheimer"
             }
         ],
 	    "Git":{
             "Version":"V1.0.3",
-            "Descricao":"Nova tabela cliente"
+            "Descricao":"Nova tabela produto"
         }
     },
     {
